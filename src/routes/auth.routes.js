@@ -1,24 +1,27 @@
 import { Router } from "express";
-import {
-    login
 
-} from "../controllers/auth.controllers.js";
+import { login } from "../controllers/auth.controllers.js";
+
+import logger from "../middlewares/logger.middleware.js";
+import validateLogin from "../middlewares/validateLogin.middleware.js";
+import authMiddleware from "../middlewares/auth.middleware.js";
 
 const authRouter = Router();
 
-// Endpoint público (No autenticado y no autorizado)
+console.log("authRouter cargado");
+authRouter.get("/publico", (req, res) => {
 
-authRouter.get('/publico', (req, res) =>
-    res.send('Endpoint público'))
+    res.send("Endpoint público");
 
-//Endpoint autenticado
+});
+authRouter.post(
+    "/autenticado",
+    logger,
+    validateLogin,
+    authMiddleware,
+    login
+);
 
-authRouter.post('/autenticado', login)
-
-//Endpoint autorizado
-
-
-
-export default authRouter
+export default authRouter;
 
 
