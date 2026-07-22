@@ -14,5 +14,5 @@ const validateLogin = (req, res, next) => {
     next();
 
 }
-console.log('2.validateLogin');
+
 export default validateLogin;

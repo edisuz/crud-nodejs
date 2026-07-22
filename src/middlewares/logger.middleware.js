@@ -8,6 +8,5 @@ const logger = (req, res, next) => {
     next();
 
 }
-console.log('1.logger');
 
 export default logger;
